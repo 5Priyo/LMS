@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model book {
+  id          Int    @id @default(autoincrement())
+  title       String
+  author      String
+  level       String?      // New optional column
+  description String?      // New optional column
+  imagePath   String?      // Kept as optional
+  category    String?     // ✅ New optional column
+    pdfPath     String? // ✅ New field for PDF file path
+}
+
+
+model user {
+  id       Int    @id @default(autoincrement())
+  email    String @unique(map: "User_email_key")
+  username String
+  password String
+}
+
+model magazine {
+  id        Int    @id @default(autoincrement())
+  title     String
+  author    String
+  imagePath String?   // optional: store image file name or URL
+  summary   String?   // optional: short description or subtitle
+}
